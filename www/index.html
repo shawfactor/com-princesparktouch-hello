@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <title>Hello World</title>
+<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+
+<script type="text/javascript" charset="utf-8" src="canOpen.js"></script>
+
+ <script type="text/javascript" charset="utf-8">
+
+    // Wait for Cordova to load
+    //
+    document.addEventListener("deviceready", initcan, false);
+
+function init() {
+
+   // find all contacts with 'Bob' in any name field
+var options = new ContactFindOptions();
+options.filter="Shaw";
+options.multiple=true;
+var fields = ["displayName", "name"];
+navigator.contacts.find(fields, onSuccess, onError, options);
+
+}
+
+function onError(e) {
+    alert("failure");
+}
+
+function onSuccess(contacts) {
+alert(contacts.length);
+
+     for (var i = 0; i < contacts.length; i++) {
+            alert("Display Name = " + contacts[i].name.familyName);
+        }
+}
+
+function initcan() {
+
+CanOpen('fb://', function(isInstalled) {
+
+    if(isInstalled) {
+
+        alert('Facebook is installed');
+
+
+    } else {
+
+        alert('Facebook is not installed');
+
+    }
+});
+
+
+}
+
+
+    </script>
+
+
+
+
+
+
+
+<script type='text/javascript' src='https://princesparktouch.com/wp-includes/js/jquery/jquery.js?ver=1.11.3'></script>
+<script type='text/javascript' src='https://princesparktouch.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
+
+<script type='text/javascript' src='https://princesparktouch.com/wp-content/plugins/lh-zero-spam/assets/lh-zero-spam.js?ver=0.03'></script>
+
+<script type='text/javascript' defer="defer" src='https://princesparktouch.com/wp-content/plugins/ppt-site-specific/js/specific.js?ver=0.02'></script>
+
+<script type='text/javascript' src='https://princesparktouch.com/wp-content/plugins/lh-signing/scripts/lh-signing.js?ver=1.0'></script>
+
+
+
+
+<script type="text/javascript">
+var screenReaderText = {"expand":"<span class=\"screen-reader-text\">expand child menu<\/span>","collapse":"<span class=\"screen-reader-text\">collapse child menu<\/span>"};
+
+function run_twentyfifteen( $ ) {
+	var $body, $window, $sidebar, adminbarOffset, top = false,
+	    bottom = false, windowWidth, windowHeight, lastWindowPos = 0,
+	    topOffset = 0, bodyHeight, sidebarHeight, resizeTimer,
+	    secondary, button;
+
+	function initMainNavigation( container ) {
+		// Add dropdown toggle that display child menu items.
+		container.find( '.menu-item-has-children > a' ).after( '<button class="dropdown-toggle" aria-expanded="false">' + screenReaderText.expand + '</button>' );
+
+		// Toggle buttons and submenu items with active children menu items.
+		container.find( '.current-menu-ancestor > button' ).addClass( 'toggle-on' );
+		container.find( '.current-menu-ancestor > .sub-menu' ).addClass( 'toggled-on' );
+
+		container.find( '.dropdown-toggle' ).click( function( e ) {
+			var _this = $( this );
+			e.preventDefault();
+			_this.toggleClass( 'toggle-on' );
+			_this.next( '.children, .sub-menu' ).toggleClass( 'toggled-on' );
+			_this.attr( 'aria-expanded', _this.attr( 'aria-expanded' ) === 'false' ? 'true' : 'false' );
+			_this.html( _this.html() === screenReaderText.expand ? screenReaderText.collapse : screenReaderText.expand );
+		} );
+	}
+	initMainNavigation( $( '.main-navigation' ) );
+
+	// Re-initialize the main navigation when it is updated, persisting any existing submenu expanded states.
+	$( document ).on( 'customize-preview-menu-refreshed', function( e, params ) {
+		if ( 'primary' === params.wpNavMenuArgs.theme_location ) {
+			initMainNavigation( params.newContainer );
+
+			// Re-sync expanded states from oldContainer.
+			params.oldContainer.find( '.dropdown-toggle.toggle-on' ).each(function() {
+				var containerId = $( this ).parent().prop( 'id' );
+				$( params.newContainer ).find( '#' + containerId + ' > .dropdown-toggle' ).triggerHandler( 'click' );
+			});
+		}
+	});
+
+	secondary = $( '#secondary' );
+	button = $( '.site-branding' ).find( '.secondary-toggle' );
+
+	// Enable menu toggle for small screens.
+	( function() {
+		var menu, widgets, social;
+		if ( ! secondary || ! button ) {
+			return;
+		}
+
+		// Hide button if there are no widgets and the menus are missing or empty.
+		menu    = secondary.find( '.nav-menu' );
+		widgets = secondary.find( '#widget-area' );
+		social  = secondary.find( '#social-navigation' );
+		if ( ! widgets.length && ! social.length && ( ! menu || ! menu.children().length ) ) {
+			button.hide();
+			return;
+		}
+
+		button.on( 'click.twentyfifteen', function() {
+			secondary.toggleClass( 'toggled-on' );
+			secondary.trigger( 'resize' );
+			$( this ).toggleClass( 'toggled-on' );
+			if ( $( this, secondary ).hasClass( 'toggled-on' ) ) {
+				$( this ).attr( 'aria-expanded', 'true' );
+				secondary.attr( 'aria-expanded', 'true' );
+			} else {
+				$( this ).attr( 'aria-expanded', 'false' );
+				secondary.attr( 'aria-expanded', 'false' );
+			}
+		} );
+	} )();
+
+	/**
+	 * @summary Add or remove ARIA attributes.
+	 * Uses jQuery's width() function to determine the size of the window and add
+	 * the default ARIA attributes for the menu toggle if it's visible.
+	 * @since Twenty Fifteen 1.1
+	 */
+	function onResizeARIA() {
+		if ( 955 > $window.width() ) {
+			button.attr( 'aria-expanded', 'false' );
+			secondary.attr( 'aria-expanded', 'false' );
+			button.attr( 'aria-controls', 'secondary' );
+		} else {
+			button.removeAttr( 'aria-expanded' );
+			secondary.removeAttr( 'aria-expanded' );
+			button.removeAttr( 'aria-controls' );
+		}
+	}
+
+	// Sidebar scrolling.
+	function resize() {
+		windowWidth = $window.width();
+
+		if ( 955 > windowWidth ) {
+			top = bottom = false;
+			$sidebar.removeAttr( 'style' );
+		}
+	}
+
+	function scroll() {
+		var windowPos = $window.scrollTop();
+
+		if ( 955 > windowWidth ) {
+			return;
+		}
+
+		sidebarHeight = $sidebar.height();
+		windowHeight  = $window.height();
+		bodyHeight    = $body.height();
+
+		if ( sidebarHeight + adminbarOffset > windowHeight ) {
+			if ( windowPos > lastWindowPos ) {
+				if ( top ) {
+					top = false;
+					topOffset = ( $sidebar.offset().top > 0 ) ? $sidebar.offset().top - adminbarOffset : 0;
+					$sidebar.attr( 'style', 'top: ' + topOffset + 'px;' );
+				} else if ( ! bottom && windowPos + windowHeight > sidebarHeight + $sidebar.offset().top && sidebarHeight + adminbarOffset < bodyHeight ) {
+					bottom = true;
+					$sidebar.attr( 'style', 'position: fixed; bottom: 0;' );
+				}
+			} else if ( windowPos < lastWindowPos ) {
+				if ( bottom ) {
+					bottom = false;
+					topOffset = ( $sidebar.offset().top > 0 ) ? $sidebar.offset().top - adminbarOffset : 0;
+					$sidebar.attr( 'style', 'top: ' + topOffset + 'px;' );
+				} else if ( ! top && windowPos + adminbarOffset < $sidebar.offset().top ) {
+					top = true;
+					$sidebar.attr( 'style', 'position: fixed;' );
+				}
+			} else {
+				top = bottom = false;
+				topOffset = ( $sidebar.offset().top > 0 ) ? $sidebar.offset().top - adminbarOffset : 0;
+				$sidebar.attr( 'style', 'top: ' + topOffset + 'px;' );
+			}
+		} else if ( ! top ) {
+			top = true;
+			$sidebar.attr( 'style', 'position: fixed;' );
+		}
+
+		lastWindowPos = windowPos;
+	}
+
+	function resizeAndScroll() {
+		resize();
+		scroll();
+	}
+
+	$( document ).ready( function() {
+		$body          = $( document.body );
+		$window        = $( window );
+		$sidebar       = $( '#sidebar' ).first();
+		adminbarOffset = $body.is( '.admin-bar' ) ? $( '#wpadminbar' ).height() : 0;
+
+		$window
+			.on( 'scroll.twentyfifteen', scroll )
+			.on( 'load.twentyfifteen', onResizeARIA )
+			.on( 'resize.twentyfifteen', function() {
+				clearTimeout( resizeTimer );
+				resizeTimer = setTimeout( resizeAndScroll, 500 );
+				onResizeARIA();
+			} );
+		$sidebar.on( 'click.twentyfifteen keydown.twentyfifteen', 'button', resizeAndScroll );
+
+		resizeAndScroll();
+
+		for ( var i = 1; i < 6; i++ ) {
+			setTimeout( resizeAndScroll, 100 * i );
+		}
+	} );
+
+} 
+
+
+</script>
+
+<script type="text/javascript">
+
+function run_callbacks() {
+ 
+}
+
+function appendToFunction(fn, callback) {
+  window[fn] = (function(fn){
+    return function() {
+      fn();
+      callback();
+    }
+ }(window[fn]));
+}
+
+appendToFunction('run_callbacks', function(){
+run_twentyfifteen(jQuery);
+lh_zero_spam_run();
+ppt_site_specific_run_js();
+lh_signing_run_js();
+});
+
+
+
+
+
+
+
+function AJAXPost(formId) {
+    var elem   = document.getElementById(formId).elements;
+    var url    = document.getElementById(formId).action;        
+    var params = "";
+    var value;
+
+    for (var i = 0; i < elem.length; i++) {
+        if (elem[i].tagName == "SELECT") {
+            value = elem[i].options[elem[i].selectedIndex].value;
+        } else {
+            value = elem[i].value;                
+        }
+        params += elem[i].name + "=" + encodeURIComponent(value) + "&";
+    }
+
+    if (window.XMLHttpRequest) {
+        // code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    } else { 
+        // code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xmlhttp.open("POST",url,false);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.setRequestHeader("Content-length", params.length);
+    xmlhttp.setRequestHeader("Connection", "close");
+xmlhttp.setRequestHeader ("Accept", "application/json");
+    xmlhttp.send(params);
+
+    return xmlhttp.responseText;
+}
+
+function update_body(response) {
+
+
+
+}
+
+
+function loadExtJSON(source) {
+
+
+    var request = new XMLHttpRequest();
+    request.open("GET", source, true);
+
+request.setRequestHeader ("Accept", "application/json");
+request.onreadystatechange = function() {
+
+
+
+     if (request.readyState == 4) {
+
+       if (request.status == 200 || request.status == 0){ 
+  
+ try{
+        var myArr = JSON.parse(request.responseText);
+	document.body.innerHTML = myArr["html"];
+run_callbacks();
+	localStorage.setItem('exitsatus',source); 
+	control_links();
+control_forms();
+	}catch(e){
+       window.open(source, '_blank', 'location=no,enableviewportscale=yes');
+    }
+	
+
+
+         } else {
+
+alert("bad code");
+
+}
+
+        }
+    }
+
+    request.send();
+}
+
+function control_forms() {
+
+
+var Forms = document.getElementsByTagName("form");
+
+for (var i = 0; i < Forms.length ; i++) {
+
+
+ Forms[i].addEventListener("submit", 
+        function (event) {
+            event.preventDefault();
+response = AJAXPost(this.id);
+
+var myArr = JSON.parse(response);
+	document.body.innerHTML = myArr["html"];
+run_callbacks();
+	localStorage.setItem('exitsatus',source); 
+	control_links();
+control_forms();
+
+
+
+        }, 
+        false);
+   
+
+
+}
+
+}
+
+
+function control_links() {
+
+var Anchors = document.getElementsByTagName("a");
+
+for (var i = 0; i < Anchors.length ; i++) {
+
+
+if (Anchors[i].protocol == 'https:' || Anchors[i].protocol == 'http:'){
+
+
+if (Anchors[i].hostname == 'princesparktouch.com'){
+
+    Anchors[i].addEventListener("click", 
+        function (event) {
+            event.preventDefault();
+		loadExtJSON(this.href);
+        }, 
+        false);
+
+} else {
+
+
+
+    Anchors[i].addEventListener("click", 
+        function (event) {
+            event.preventDefault();
+window.open(this.href, '_blank', 'location=no,enableviewportscale=yes');
+        }, 
+        false);
+
+
+
+
+}
+
+} else {
+
+Anchors[i].addEventListener("click", 
+        function (event) {
+            event.preventDefault();
+window.open(this.href, '_system')
+        }, 
+        false);
+
+
+}
+
+
+}
+
+}
+
+function init_app(){
+
+  
+lastpage = "https://princesparktouch.com";
+
+loadExtJSON(lastpage);
+
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+
+
+
+
+ 
+
+});
+
+
+
+</script>
+<link rel='stylesheet' id='twentyfifteen-css-css'  href='https://princesparktouch.com/wp-content/themes/twentyfifteen/style.css?ver=4.4.2' type='text/css' media='all' />
+<link rel='stylesheet' id='twentyfifteen-fonts-css'  href='https://fonts.googleapis.com/css?family=Noto+Sans%3A400italic%2C700italic%2C400%2C700%7CNoto+Serif%3A400italic%2C700italic%2C400%2C700%7CInconsolata%3A400%2C700&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='https://princesparktouch.com/wp-content/plugins/jetpack/_inc/genericons/genericons/genericons.css?ver=3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='twentyfifteen-style-css'  href='https://princesparktouch.com/wp-content/themes/lh-2015/style.css?ver=4.4.2' type='text/css' media='all' />
+<link rel='stylesheet' id='ppt_custom_theme_style-css'  href='https://princesparktouch.com/wp-content/plugins/ppt-custom-theme/assets/style.css?ver=0.82' type='text/css' media='all' />
+<link rel='stylesheet' id='twenty__fifteen__infinite___style-css'  href='https://princesparktouch.com/wp-content/plugins/ppt-infinite-scroll-to-2015/styles/styles.css?ver=0.01' type='text/css' media='all' />
+<link rel='stylesheet' id='ppt_site_specific_style-css'  href='https://princesparktouch.com/wp-content/plugins/ppt-site-specific/css/specific.css?ver=0.85' type='text/css' media='all' />
+    </head>
+<body>
+
+
+
+
+</body>
+</html>

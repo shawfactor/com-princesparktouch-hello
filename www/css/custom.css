@@ -1,0 +1,174 @@
+	/* Custom Header Background Color */
+		body:before,
+		.site-header {
+			background-color: #1b426b;
+		}
+
+.social-navigation a[href*="?lh-save-down-output=html"]:before {
+	content: "\f50b";
+}
+
+.social-navigation a[href*="fb://"]:before {
+	content: "\f203";
+}
+
+.social-navigation a[href*="tel:"]:before {
+	content: "\f50c";
+}
+
+
+.social-navigation a[href*="princesparktouch.lhero.org/login/"]:before {
+content: "\f304";
+
+}
+
+.social-navigation a[href*="?lh-login-page-action=logout"]:before {
+content: "\f406";
+
+}
+
+
+
+a.button {
+   padding: 10px 15px;
+    background: #1b426b;
+    color: #ffa500;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border: solid 1px #20538D;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px
+
+}
+
+		@media screen and (min-width: 59.6875em) {
+			.site-header,
+			.secondary {
+				background-color: transparent;
+			}
+
+			.widget button,
+			.widget input[type="button"],
+			.widget input[type="reset"],
+			.widget input[type="submit"],
+			.widget_calendar tbody a,
+			.widget_calendar tbody a:hover,
+			.widget_calendar tbody a:focus {
+				color: #1b426b;
+			}
+		}
+	
+
+		/* Custom Sidebar Text Color */
+		.site-title a,
+		.site-description,
+		.secondary-toggle:before {
+			color: #ffa500;
+		}
+
+		.site-title a:hover,
+		.site-title a:focus {
+			color: #ffa500; /* Fallback for IE7 and IE8 */
+			color: rgba( 255, 165, 0, 0.7);
+		}
+
+		.secondary-toggle {
+			border-color: #ffa500; /* Fallback for IE7 and IE8 */
+			border-color: rgba( 255, 165, 0, 0.1);
+		}
+
+		.secondary-toggle:hover,
+		.secondary-toggle:focus {
+			border-color: #ffa500; /* Fallback for IE7 and IE8 */
+			border-color: rgba( 255, 165, 0, 0.3);
+		}
+
+		.site-title a {
+			outline-color: #ffa500; /* Fallback for IE7 and IE8 */
+			outline-color: rgba( 255, 165, 0, 0.3);
+		}
+
+		@media screen and (min-width: 59.6875em) {
+			.secondary a,
+			.dropdown-toggle:after,
+			.widget-title,
+			.widget blockquote cite,
+			.widget blockquote small {
+				color: #ffa500;
+			}
+
+			.widget button,
+			.widget input[type="button"],
+			.widget input[type="reset"],
+			.widget input[type="submit"],
+			.widget_calendar tbody a {
+				background-color: #ffa500;
+			}
+
+			.textwidget a {
+				border-color: #ffa500;
+			}
+
+			.secondary a:hover,
+			.secondary a:focus,
+			.main-navigation .menu-item-description,
+			.widget,
+			.widget blockquote,
+			.widget .wp-caption-text,
+			.widget .gallery-caption {
+				color: rgba( 255, 165, 0, 0.7);
+			}
+
+			.widget button:hover,
+			.widget button:focus,
+			.widget input[type="button"]:hover,
+			.widget input[type="button"]:focus,
+			.widget input[type="reset"]:hover,
+			.widget input[type="reset"]:focus,
+			.widget input[type="submit"]:hover,
+			.widget input[type="submit"]:focus,
+			.widget_calendar tbody a:hover,
+			.widget_calendar tbody a:focus {
+				background-color: rgba( 255, 165, 0, 0.7);
+			}
+
+			.widget blockquote {
+				border-color: rgba( 255, 165, 0, 0.7);
+			}
+
+			.main-navigation ul,
+			.main-navigation li,
+			.secondary-toggle,
+			.widget input,
+			.widget textarea,
+			.widget table,
+			.widget th,
+			.widget td,
+			.widget pre,
+			.widget li,
+			.widget_categories .children,
+			.widget_nav_menu .sub-menu,
+			.widget_pages .children,
+			.widget abbr[title] {
+				border-color: rgba( 255, 165, 0, 0.1);
+			}
+
+			.dropdown-toggle:hover,
+			.dropdown-toggle:focus,
+			.widget hr {
+				background-color: rgba( 255, 165, 0, 0.1);
+			}
+
+			.widget input:focus,
+			.widget textarea:focus {
+				border-color: rgba( 255, 165, 0, 0.3);
+			}
+
+			.sidebar a:focus,
+			.dropdown-toggle:focus {
+				outline-color: rgba( 255, 165, 0, 0.3);
+			}
+		}
